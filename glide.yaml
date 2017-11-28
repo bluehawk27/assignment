@@ -1,0 +1,19 @@
+package: github.com/bluehawk27/assignment
+import:
+- package: github.com/Sirupsen/logrus
+  version: ^1.0.3
+- package: github.com/gorilla/mux
+  version: ^1.6.0
+- package: github.com/go-redis/redis
+  version: ^6.7.4
+- package: github.com/karlseguin/ccache
+  version: ^2.0.2
+- package: github.com/spf13/viper
+  version: ^1.0.0
+- package: github.com/mitchellh/go-homedir
+- package: github.com/alicebob/miniredis
+  version: ^2.2.1
+- package: github.com/stretchr/testify
+  version: ^1.1.4
+  subpackages:
+  - mock
