@@ -29,7 +29,7 @@ In your $GOPATH
 
 This will build and run the all unit tests in the project.
 
-    $ git clone some path
+    $ git clone https://github.com/bluehawk27/assignment.git
     $ cd assignment
     $ make deps
     $ make test
