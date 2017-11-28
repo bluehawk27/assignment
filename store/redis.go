@@ -9,6 +9,12 @@ import (
 	"github.com/go-redis/redis"
 )
 
+type Redis interface {
+	Ping(ctx context.Context) (string, error)
+	Get(ctx context.Context, key string) (*Message, error)
+	Set(ctx context.Context, key string, value interface{}) error
+}
+
 // RedisClient : Redis "Object"
 type RedisClient struct {
 	Client *redis.Client
@@ -25,7 +31,7 @@ func setClient(address string, password string, db int) *redis.Client {
 	return client
 }
 
-//  NewClient : Redis Client Instance
+// NewClient : Redis Client Instance
 func NewClient() *RedisClient {
 	config.Init()
 	rc := config.GetRedisConfig()

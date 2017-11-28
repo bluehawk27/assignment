@@ -50,7 +50,7 @@ The Body should have a body. Any type of information that you would like to stor
 
 ## TODO
 ---
-* Expose Store interface to Mock unit tests dependant on Redis
+* Use Reis Store interface to Mock unit tests dependant on Redis
 * Complete Dockerization
 * Hash (md5, sha1) Keys so key size remains smaller. Currently Keys can be of any length.
 
