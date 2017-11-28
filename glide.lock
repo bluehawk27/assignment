@@ -1,8 +1,6 @@
-hash: b8c680d0d8c07708cc4e89562880da43e3961c41a5ac459de055cfa62b778b0d
-updated: 2017-11-27T17:24:13.279139-08:00
+hash: 95e202a2786d53bfb917319b7930aff7046e2411274709c7bd5f5c8ef34184f1
+updated: 2017-11-27T17:59:42.387587-08:00
 imports:
-- name: github.com/alicebob/miniredis
-  version: 70cb3fab2cf658a95f2ccae5bfb2f0ccbba0c548
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
 - name: github.com/go-redis/redis
@@ -52,10 +50,6 @@ imports:
   version: 4c012f6dcd9546820e378d0bdda4d8fc772cdfea
 - name: github.com/spf13/viper
   version: 25b30aa063fc18e48662b86996252eabdcf2f0c7
-- name: github.com/stretchr/testify
-  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
-  subpackages:
-  - mock
 - name: golang.org/x/crypto
   version: b080dc9a8c480b08e698fb1219160d598526310f
   subpackages:
