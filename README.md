@@ -25,7 +25,7 @@ The application is split up into packages where there is a clear seperation of c
 
 ## Quick Start
 ___
-In your $GOPATH
+In your $GOPATH/src/github.com/bluehawk27
 
 This will build and run the all unit tests in the project.
 
@@ -52,7 +52,7 @@ The Body should have a body. Any type of information that you would like to stor
 ---
 * Expose Store interface to Mock unit tests dependant on Redis
 * Complete Dockerization
-* Hash Keys so key size remains smaller. Currently Keys can be of any length.
+* Hash (md5, sha1) Keys so key size remains smaller. Currently Keys can be of any length.
 
 
 ## Time Allocation
