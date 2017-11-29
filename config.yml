@@ -1,7 +1,7 @@
 environment: 'dev'
 
 redis:
-  host: 'localhost'
+  host: 'redis' # use 127.0.0.1 if running outside of docker
   port: '6379'
   password: ''
   DB: 0
@@ -12,5 +12,5 @@ ccache:
   expiry: 60
 
 proxy:
-  host: '127.0.0.1'
+  host: '0.0.0.0'
   port: '8082'
