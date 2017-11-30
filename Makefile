@@ -17,6 +17,7 @@ test:
 
 start: 
 	go install
+	redis-server ./local-redis.conf
 	assignment
 
 clean:

@@ -27,7 +27,15 @@ The application is split up into packages where there is a clear seperation of c
 ___
 In your $GOPATH/src/github.com/bluehawk27
 
-This will build and run the all unit tests in the project.
+### Docker
+   
+    $ git clone https://github.com/bluehawk27/assignment.git
+    $ cd assignment
+    $ make test
+    $ docker-compose up assignment
+
+### Local
+This will build and run the all unit tests in the project if you dont run docker.  Change the redis host to 127.0.0.1 in the config.yml file.
 
     $ git clone https://github.com/bluehawk27/assignment.git
     $ cd assignment
@@ -40,12 +48,12 @@ You should now be able to use an http Client like Postman and Add/Get to the bac
 
 #### POST:
 
-`http://127.0.0.1:8082/add/{KEY}`
+`http://0.0.0.0:8082/add/{KEY}`
 
 The Body should have a body. Any type of information that you would like to store.
 
 #### GET:
-`http://127.0.0.1:8082/get/{KEY}`
+`http://0.0.0.0:8082/get/{KEY}`
 
 
 ## TODO
