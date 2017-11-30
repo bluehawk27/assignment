@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -11,6 +12,42 @@ import (
 
 //TODO MOCK the Redis Service
 var servType = NewService()
+
+type FakeRedis struct {
+	PingFunc func(context.Context) (string, error)
+	SetFunc  func(context.Context, string, interface{}) error
+	GetFunc  func(context.Context, string) (*store.Message, error)
+}
+
+// Ping : FakeRedis Ping
+func (r FakeRedis) Ping(ctx context.Context) (string, error) {
+	return "PONG", nil
+}
+
+// Set : FakeRedis Set
+func (r FakeRedis) Set(ctx context.Context, key string, value interface{}) error {
+	if r.SetFunc != nil {
+		return fmt.Errorf("Error Setting")
+	}
+	return nil
+}
+
+// Get : FakeRedis Get
+func (r FakeRedis) Get(ctx context.Context, key string) (*store.Message, error) {
+	var m *store.Message
+	if r.GetFunc != nil {
+		return r.GetFunc(ctx, key)
+	}
+	if key == "test no Key" {
+		m = &store.Message{
+			Key:   key,
+			Value: "Key Does Not Exist",
+		}
+		return m, nil
+	}
+
+	return nil, fmt.Errorf("Get %s Error", key)
+}
 
 func TestNewService(t *testing.T) {
 	tests := []struct {
@@ -30,12 +67,13 @@ func TestNewService(t *testing.T) {
 
 func TestService_Ping(t *testing.T) {
 	ctx := context.Background()
+	fr := FakeRedis{}
 	type fields struct {
-		Store store.RedisClient
+		Store FakeRedis
 		Cache cache.Cache
 	}
 	f := fields{
-		Store: servType.Store,
+		Store: fr,
 		Cache: servType.Cache,
 	}
 	tests := []struct {
@@ -66,12 +104,13 @@ func TestService_Ping(t *testing.T) {
 
 func TestService_Add(t *testing.T) {
 	ctx := context.Background()
+	fr := FakeRedis{}
 	type fields struct {
-		Store store.RedisClient
+		Store FakeRedis
 		Cache cache.Cache
 	}
 	f := fields{
-		Store: servType.Store,
+		Store: fr,
 		Cache: servType.Cache,
 	}
 	type args struct {
@@ -106,13 +145,14 @@ func TestService_Add(t *testing.T) {
 
 func TestService_Get(t *testing.T) {
 	ctx := context.Background()
+	fr := FakeRedis{}
 
 	type fields struct {
-		Store store.RedisClient
+		Store FakeRedis
 		Cache cache.Cache
 	}
 	f := fields{
-		Store: servType.Store,
+		Store: fr,
 		Cache: servType.Cache,
 	}
 	type args struct {
@@ -122,7 +162,7 @@ func TestService_Get(t *testing.T) {
 		key: "test",
 	}
 	a1 := args{
-		key: "noKey",
+		key: "test no Key",
 	}
 	m := &store.Message{
 		Key:   a.key,
@@ -149,6 +189,8 @@ func TestService_Get(t *testing.T) {
 				Cache: tt.fields.Cache,
 			}
 			got, err := s.Get(ctx, tt.args.key)
+			// fmt.Println(got)
+			// fmt.Println(err)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Service.Get() error = %v, wantErr %v", err, tt.wantErr)
 				return

@@ -2,11 +2,9 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/bluehawk27/assignment/cache"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/bluehawk27/assignment/store"
 )
 
@@ -19,7 +17,7 @@ type ServiceType interface {
 
 // Service : Service layer Object
 type Service struct {
-	Store store.RedisClient
+	Store store.Redis
 	Cache cache.Cache
 }
 
@@ -30,7 +28,7 @@ func NewService() *Service {
 	cache := cache.NewCache()
 
 	service := &Service{
-		Store: *store,
+		Store: store,
 		Cache: *cache,
 	}
 
@@ -52,7 +50,6 @@ func (s *Service) Add(ctx context.Context, key string, body []byte) error {
 
 	err := s.Store.Set(ctx, key, string(body))
 	if err != nil {
-		log.Error("Error Adding value to Redis: ", err)
 		return err
 	}
 
@@ -70,17 +67,16 @@ func (s *Service) Get(ctx context.Context, key string) (*store.Message, error) {
 
 	item, err := s.Cache.Get(key)
 	if item == nil || err != nil {
-		log.Info("CacheMiss:  Getting from Redis")
+		// log.Info("CacheMiss:  Getting from Redis")
 		msg, err = s.Store.Get(ctx, key)
 		if err != nil {
-			log.Error("Error Redis: ", err)
+			// log.Error("Error Redis: ", err)
 			return nil, err
 		}
 		s.Cache.Set(key, msg.Value)
 
 		return msg, nil
 	}
-	fmt.Println("Item came from Cache:", msg)
 	msg = &store.Message{
 		Key:   key,
 		Value: item,

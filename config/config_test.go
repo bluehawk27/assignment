@@ -40,7 +40,7 @@ func TestGetCCacheConfig(t *testing.T) {
 
 func TestGetRedisConfig(t *testing.T) {
 	r := Redis{
-		Host:     "localhost",
+		Host:     "redis",
 		Port:     "6379",
 		Password: "",
 		DB:       0,
@@ -63,7 +63,7 @@ func TestGetRedisConfig(t *testing.T) {
 
 func TestGetProxyConfig(t *testing.T) {
 	p := Proxy{
-		Host: "127.0.0.1",
+		Host: "0.0.0.0",
 		Port: "8082",
 	}
 	tests := []struct {
@@ -82,7 +82,7 @@ func TestGetProxyConfig(t *testing.T) {
 }
 
 func TestGetProxyConnectionString(t *testing.T) {
-	s := "127.0.0.1:8082"
+	s := "0.0.0.0:8082"
 	tests := []struct {
 		name string
 		want string
@@ -99,7 +99,7 @@ func TestGetProxyConnectionString(t *testing.T) {
 }
 
 func TestGetRedisConnectionString(t *testing.T) {
-	s := "localhost:6379"
+	s := "redis:6379"
 	tests := []struct {
 		name string
 		want string

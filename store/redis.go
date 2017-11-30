@@ -2,7 +2,6 @@ package store
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/bluehawk27/assignment/config"
@@ -32,7 +31,7 @@ func setClient(address string, password string, db int) *redis.Client {
 }
 
 // NewClient : Redis Client Instance
-func NewClient() *RedisClient {
+func NewClient() Redis {
 	config.Init()
 	rc := config.GetRedisConfig()
 	address := config.GetRedisConnectionString()
@@ -50,7 +49,6 @@ func NewClient() *RedisClient {
 
 // Ping : Redis Instance Check
 func (s *RedisClient) Ping(ctx context.Context) (string, error) {
-
 	pong, err := s.Client.Ping().Result()
 	if err != nil {
 		return "", err
@@ -64,7 +62,6 @@ func (s *RedisClient) Set(ctx context.Context, key string, value interface{}) er
 	exp := time.Duration(s.Expiry) * time.Second
 	err := s.Client.Set(key, value, exp).Err()
 	if err != nil {
-		fmt.Println("error is:", err)
 		return err
 	}
 	return nil

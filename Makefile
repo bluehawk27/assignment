@@ -13,7 +13,6 @@ deps:
 	glide install
 
 test:
-	redis-server ./local-redis.conf
 	PROXY_CONFIGPATH=$(BASEDIR) PROXY_CONFIGFILE=config-test go test --cover -v $(TESTDIRS)
 
 start: 
