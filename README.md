@@ -25,21 +25,19 @@ The application is split up into packages where there is a clear seperation of c
 
 ## Quick Start
 ___
-In your $GOPATH/src/github.com/bluehawk27
 
 ### Docker
-   
     $ git clone https://github.com/bluehawk27/assignment.git
     $ cd assignment
-    $ make test
+    $ docker-compose run test
     $ docker-compose up assignment
 
 ### Local
+In your $GOPATH/src/github.com/bluehawk27
 This will build and run the all unit tests in the project if you dont run docker.  Change the redis host to 127.0.0.1 in the config.yml file.
 
     $ git clone https://github.com/bluehawk27/assignment.git
     $ cd assignment
-    $ make deps
     $ make test
     $ make start
 

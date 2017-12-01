@@ -1,6 +1,15 @@
 version: "2"
 
 services:
+  test:
+    image: golang:1.9.2-alpine
+    entrypoint: ["go", "test", "--cover", "-v", "./..."]
+    volumes:
+      - .:/go/src/github.com/bluehawk27/assignment
+    working_dir: /go/src/github.com/bluehawk27/assignment
+    ports:
+      - "8082:8082"
+
   assignment:
     image: golang:1.9.2-alpine
     entrypoint: ["go", "run", "main.go"]

@@ -3,11 +3,12 @@ BINARY=assignmentd
 TESTDIRS=`go list ./... | grep -v /vendor/`
 BASEDIR=$(shell pwd)
 
-# create binary for Docker
+# create binary
 default:
 	rm -rf build/
 	mkdir build
 	CGO_ENABLED=0 GOOS=linux go build -o build/$(BINARY)
+
 
 deps:
 	glide install
