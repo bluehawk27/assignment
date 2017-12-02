@@ -34,6 +34,7 @@ ___
 
 ### Local
 In your $GOPATH/src/github.com/bluehawk27
+
 This will build and run the all unit tests in the project if you dont run docker.  Change the redis host to 127.0.0.1 in the config.yml file.
 
     $ git clone https://github.com/bluehawk27/assignment.git
@@ -56,8 +57,6 @@ The Body should have a body. Any type of information that you would like to stor
 
 ## TODO
 ---
-* Use Reis Store interface to Mock unit tests dependant on Redis
-* Complete Dockerization
 * Hash (md5, sha1) Keys so key size remains smaller. Currently Keys can be of any length.
 
 
@@ -70,7 +69,7 @@ The Body should have a body. Any type of information that you would like to stor
 * CCache - 15 min
 * Service - 1 hr
 * HTTP API - 20 min
-* Docker - 1 Day
+* Docker - 2 Day
 * Redis Config - 1 hr
 
 Time complexity of CCache O(logn)
